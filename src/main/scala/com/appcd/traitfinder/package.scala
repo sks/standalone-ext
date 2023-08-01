@@ -1,11 +1,11 @@
-package org.codeminers
+package com.appcd
 
 import io.shiftleft.codepropertygraph.generated.{Cpg, NodeTypes}
 import io.shiftleft.codepropertygraph.generated.nodes.Mynodetype
 import overflowdb.traversal._
 import scala.jdk.CollectionConverters.IteratorHasAsScala
 
-package object standalone {
+package object traitfinder {
 
   /** Example of a custom language step
     */
@@ -16,15 +16,15 @@ package object standalone {
     }
   }
 
-  /** Example implicit conversion that forwards to the `StandaloneStarters` class
+  /** Example implicit conversion that forwards to the `TraitFinder` class
     */
-  implicit def toStandaloneStarters(cpg: Cpg): StandaloneStarters =
-    new StandaloneStarters(cpg)
+  implicit def toStandaloneStarters(cpg: Cpg): TraitFinder =
+    new TraitFinder(cpg)
 }
 
 /** Example of custom node type starters
   */
-class StandaloneStarters(cpg: Cpg) {
+class TraitFinder(cpg: Cpg) {
   def mynodetype: Traversal[Mynodetype] =
     cpg.graph.nodes(NodeTypes.MYNODETYPE).asScala.cast[Mynodetype]
 }

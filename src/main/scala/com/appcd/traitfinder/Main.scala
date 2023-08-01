@@ -1,4 +1,4 @@
-package org.codeminers.standalone
+package com.appcd.traitfinder
 
 import io.joern.javasrc2cpg.{Config, JavaSrc2Cpg}
 import io.joern.x2cpg.X2Cpg.applyDefaultOverlays
@@ -7,17 +7,18 @@ import io.shiftleft.codepropertygraph.generated.nodes.NewMynodetype
 import io.shiftleft.passes.SimpleCpgPass
 import io.shiftleft.semanticcpg.language._
 import overflowdb.BatchedUpdate
-
 import scala.util.{Failure, Success}
+import io.shiftleft.passes.CpgPass
+
+case class TraitConfig(scanDirectory: String = ".")  {
+  
+}
 
 /** Example program that makes use of Joern as a library
   */
 object Main extends App {
-
-  println("Hello Joern")
-  print("Creating CPG... ")
-  val directory      = "testprogram"
-  val config         = Config(inputPath = directory)
+  val directory      =  "testprogram"
+  val config         = Config().withInputPath(directory)
   val cpgOrException = JavaSrc2Cpg().createCpg(config)
 
   cpgOrException match {
@@ -42,7 +43,7 @@ object Main extends App {
 
 /** Example of a custom pass that creates and stores a node in the CPG.
   */
-class MyPass(cpg: Cpg) extends SimpleCpgPass(cpg) {
+class MyPass(cpg: Cpg) extends CpgPass(cpg) {
   override def run(builder: BatchedUpdate.DiffGraphBuilder): Unit = {
     val n = NewMynodetype().myproperty("foo")
     builder.addNode(n)

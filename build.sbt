@@ -1,11 +1,11 @@
-name := "standalone"
-ThisBuild/organization := "org.codeminers"
-ThisBuild/scalaVersion := "2.13.8"
+name := "traitfinder"
+ThisBuild/organization := "com.appcd"
+ThisBuild/scalaVersion := "3.3.0"
 
 // parsed by project/Versions.scala, updated by updateDependencies.sh
-val cpgVersion = "1.3.612"
-val joernVersion = "1.2.3"
-val overflowdbVersion = "1.179"
+val cpgVersion = "1.4.8"
+val joernVersion = "2.0.19"
+val overflowdbVersion = "1.180"
 
 lazy val schema = Projects.schema
 lazy val domainClasses = Projects.domainClasses
